@@ -2,6 +2,9 @@
 <?php
   
   $selectedCourse = mysqli_query($db, "SELECT * from selectedcourse where user_id  ='".$_SESSION['id']."'"); 
+
+
+
 ?>
 
 <hr>

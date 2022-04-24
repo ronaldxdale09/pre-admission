@@ -18,12 +18,19 @@
     $id = $_SESSION['id'];
     $date = date("Ymd");
     $today = date('Y:m:d', strtotime($date));
-   $created_at = date('m/d/Y h:i:s a', time()); 
 
     
     $cet = $_FILES['cetfile']['name'];
     $moral = $_FILES['moralfile']['name'];
     $gpa = $_FILES['gpafile']['name'];
+
+    // get academic year
+    $query    = "SELECT * FROM `admissionbatch` WHERE is_active=1";
+    $result = mysqli_query($db, $query) or die(mysql_error());
+    $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+    $admission = $row['admission_id'];
+
+    
    
 
 
@@ -68,7 +75,7 @@
             $sql = "INSERT INTO attachment (cet_path,gpa_path,gmoral_path,user_id,cetValue,gpaValue) VALUES ('$cet','$moral','$gpa','$id','$cetValue','$gpaValue')";
             if (mysqli_query($db, $sql)) {
                 $file_id = mysqli_insert_id($db);
-               $query1= mysqli_query($db,"INSERT INTO selectedcourse (user_id,course_id,file_id,date,userStatus,college_id) VALUES ('$id','$courseID','$file_id','$today','PENDING','$collegeID')") ;   
+               $query1= mysqli_query($db,"INSERT INTO selectedcourse (user_id,course_id,file_id,date,userStatus,college_id,academic_id) VALUES ('$id','$courseID','$file_id','$today','PENDING','$collegeID','$admission')") ;   
             //echo $courseID;
             //echo $id;
             

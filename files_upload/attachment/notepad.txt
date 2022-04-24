@@ -1,0 +1,31 @@
+
+
+Hello sir , goodmorning, I'm currently
+subscribed on your 1500 Internet Plan
+with speed up to 100mbps,
+but suddenly I realize that my
+internet speed falls down to 20mbps.
+I would like to know what is to be
+the problem about my internet speed.
+--
+Agent: Ok sir, let me get first your account number so we can check your account. Would that be ok?-------
+Customer: Yes, Just wait for a second; my account number is 0987654
+--------
+Agent: I'm really sorry for the inconvenience sir, May I ask if  you 
+tried restarting your router, sir?
+------
+Customer: Yes, I've restarted my modem several times now, but it didn't resolve my issue.
+--------
+Agent: Okay sir for a while. I would like to know your location? So that we can verify if there is a on-going maintainance on the specific area.
+Customer: Yes, I'm located at Southcom village, Actually, the internet speed was fine 2 days ago, but yesterday until now , I'm experiencing longer buffer time when streaming videos.
+Agent: As I've check in our systems sir. We are having a cell tower maintenance near on your area, sir , this might result in drop of speed on your internet connection.
+Customer : Is that so? , Can I ask when would this maintenance be completed?
+Agent: The Cell tower maintenance near in your location is expected to  complete in April 12, 2022.
+--
+Customer : Ok , for the mean time Is there any temporary solution ? Just now, I tried to open my email, but it took like 3 minutes to load,
+Agent: I would like to know how many users are connected to the network? Due to the ongoing tower maintenance near on your location having 4 or more user connected in your network might cause a slow down on your internet speed.
+Customer : Ok , I will wait , and will get back to you when I still experiencing slow internet after the said schedule.
+Agent: After the tower maintenance completed and still experiencing the same issue. We will sending out one of our technician to your location to check on your unit.
+Customer : Ok thank you
+Agent: you are welcome; thank you for your patience, We are open 24/7 just in case you'll need our help again.,my name is Thirdy; we value our business and thank you for choosing Sky network. Have a blessed day
+

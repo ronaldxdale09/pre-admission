@@ -2,6 +2,7 @@
    include('../function/db.php');
    include('include/bootstrap.php');
    include('include/jquery.php');
+  
    
    
       
@@ -165,7 +166,9 @@
 <script src="assets/js/apply.js"></script>
 <script src="assets/js/chosen.jquery.js"></script>
 <script src="assets/js/chosen.jquery.min.js"></script>
-<script src="assets/js/sweetalert2.all.min.js"></script>
+<script src="assets/js/sweetalert2.all.min.js"></script> 
+
+<?php  include('function/academic_checker.php');?>
 <script>
    $(".college_list").chosen({no_results_text: "Oops, nothing found!"});
    
@@ -190,19 +193,3 @@
    
    });
    });
-</script>
-<!-- SWEET ALERT NOTIFICATION -->
-<?php if (isset($_SESSION['login'])): ?>
-<div class="msg">
-   <script>
-      Swal.fire(
-        'Welcome!',
-        'Login Successfully',
-      )
-   </script>
-   <?php 
-      unset($_SESSION['login']);
-      ?>
-</div>
-<?php endif ?>
-</html>

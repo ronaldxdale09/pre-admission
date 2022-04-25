@@ -26,7 +26,7 @@
         
             <form action='function/logout.php'>
             <button type='submit' class="btn btn-danger my-2 
-                my-sm-0" type="submit">
+                my-sm-0" type="submit" style='background-color:maroon;'>
                 Logout
             </button>
 </form>

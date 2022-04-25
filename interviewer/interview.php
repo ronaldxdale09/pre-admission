@@ -23,7 +23,7 @@ include('include/header.php');
 
             <li>
                 <a href="interview.php" class="active">
-                    <i class="fa fa-list" aria-hidden="true"><span>INTEVIEW</span></i>
+                    <i class="fa fa-list" aria-hidden="true"><span>INTERVIEW</span></i>
                 </a>
             </li>
 

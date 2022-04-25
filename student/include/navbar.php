@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg 
-                navbar-dark bg-dark">
+                navbar-dark" style='background-color:crimson;'>
   
         <a class="navbar-brand" href="#">WMSU</a>
   

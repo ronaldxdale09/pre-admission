@@ -27,7 +27,7 @@
       <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
          <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
             <h2 id="heading">APPLY FOR YOUR DESIRED COURSE</h2>
-            <p>Ronald Dale Fuentebella</p>
+            <p><?php echo $fullname = $_SESSION['fname'] . ' ' . $_SESSION['lname']; ?></p>
             CET SCORE :  
             <div id='my_cet'>
                <?php echo $arrCet['cetresult']?> 

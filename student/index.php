@@ -3,7 +3,7 @@
    include('include/navbar.php');
 
 
-   $getCET = mysqli_query($db, "SELECT * from cetresult where 	applicantid  ='".$_SESSION['applicantID']."'"); 
+   $getCET = mysqli_query($db, "SELECT * from cetresult where applicantid  ='".$_SESSION['applicantID']."'"); 
    $arr = mysqli_fetch_array($getCET);
 
    $listSelectedCourse = mysqli_query($db, "SELECT COUNT(*) from selectedcourse where user_id  ='".$_SESSION['id']."'"); 
@@ -53,6 +53,10 @@
                         </ul>
                     </div>
                 </div>
+                <?php
+                    $record = mysqli_query($db, "SELECT * FROM users WHERE id=".$_SESSION['id']);
+                    $user=mysqli_fetch_array($record);
+                ?>
                 <div class="col-md-8">
                     <div class="card mb-3">
                         <div class="card-body">
@@ -79,7 +83,7 @@
                                     <h6 class="mb-0">Phone</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    (239) 816-9029
+                                    <?php echo $user['contactNo']; ?>
                                 </div>
                             </div>
                             <hr>
@@ -90,7 +94,7 @@
                                     <h6 class="mb-0">Address</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    Bay Area, San Francisco, CA
+                                    <?php echo $user['address']; ?>
                                 </div>
                             </div>
                             <hr>

@@ -21,7 +21,7 @@
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['email'] = $email;
                 $_SESSION['successlog'] = "login successful"; 
-                header("Location: ../pages/admin/admin.main.php");  
+                header("Location: ../admin/index.php");  
                  }
                  elseif ($row['user_type'] == 'user'){
         

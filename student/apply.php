@@ -2,7 +2,6 @@
    include('../function/db.php');
    include('include/bootstrap.php');
    include('include/jquery.php');
-  
    
    
       
@@ -27,7 +26,7 @@
       <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
          <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
             <h2 id="heading">APPLY FOR YOUR DESIRED COURSE</h2>
-            <p><?php echo $fullname = $_SESSION['fname'] . ' ' . $_SESSION['lname']; ?></p>
+            <h4><?php echo $fullname = $_SESSION['fname'] . ' ' . $_SESSION['lname']; ?> </h4>
             CET SCORE :  
             <div id='my_cet'>
                <?php echo $arrCet['cetresult']?> 
@@ -166,9 +165,11 @@
 <script src="assets/js/apply.js"></script>
 <script src="assets/js/chosen.jquery.js"></script>
 <script src="assets/js/chosen.jquery.min.js"></script>
-<script src="assets/js/sweetalert2.all.min.js"></script> 
+<script src="assets/js/sweetalert2.all.min.js"></script>
 
-<?php  include('function/academic_checker.php');?>
+
+<?php include('function/academic_checker.php');
+include('function/applyLimit.php');?>
 <script>
    $(".college_list").chosen({no_results_text: "Oops, nothing found!"});
    
@@ -193,3 +194,4 @@
    
    });
    });
+</script>

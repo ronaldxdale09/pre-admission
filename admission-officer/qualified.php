@@ -45,6 +45,32 @@ if (isset($_GET['course'])) {
     </section>
     <h3 class="section-name">Qualified Student</h3>
     <section class="grid">
+            <div class="row">
+            <div class="col">
+              
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                <div class="form-group">
+                <h6 style='margin-bottom:0px;'>
+                        Current Active Admission Schedule: <?php
+                            $record = mysqli_query($db, "SELECT * FROM admissionbatch WHERE is_active=1");
+                            $admission=mysqli_fetch_array($record);
+                            if(isset($admission)){
+                                echo date('M d',strtotime($admission['start_date']))." to ".date('M d',strtotime($admission['end_date'])).", S.Y. ".$admission['schoolyear'];
+                            }
+                        ?>
+                    </h6>
+            
+                </div>
+            </div>
+        </div>
         <article>
             <div
                 class="table table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl mx-3 my-3">

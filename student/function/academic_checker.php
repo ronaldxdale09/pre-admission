@@ -1,11 +1,11 @@
 <?php 
-  $date = date("Ymd");
+  $date = date("Y-m-d");
 
-  $query    = "SELECT * FROM `admissionbatch` WHERE is_active=1";
+  $query    = "SELECT * FROM `admissionbatch` WHERE is_active='1'";
   $result = mysqli_query($db, $query) or die(mysql_error());
   $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
  
-  if ( $date > $row['end_date']){
+  if ( $date >  $row['end_date']){
 
     echo "<script>
     Swal.fire({

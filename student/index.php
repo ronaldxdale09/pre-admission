@@ -16,9 +16,15 @@
             <!-- Breadcrumb -->
             <nav aria-label="breadcrumb" class="main-breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">User</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                    <h6 style='margin-bottom:0px;'>
+                         Admission Schedule: <?php
+                            $record = mysqli_query($db, "SELECT * FROM admissionbatch WHERE is_active=1");
+                            $admission=mysqli_fetch_array($record);
+                            if(isset($admission)){
+                                echo date('M d',strtotime($admission['start_date']))." to ".date('M d',strtotime($admission['end_date'])).", S.Y. ".$admission['schoolyear'];
+                            }
+                        ?>
+                    </h6>
                 </ol>
             </nav>
             <!-- /Breadcrumb -->
@@ -59,9 +65,12 @@
                 ?>
                 <div class="col-md-8">
                     <div class="card mb-3">
+                        
                         <div class="card-body">
+                            
                             <div class="row">
                                 <div class="col-sm-3">
+                                    
                                     <h6 class="mb-0">Full Name</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">

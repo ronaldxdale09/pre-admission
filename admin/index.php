@@ -6,86 +6,93 @@ include('include/header.php');
 <?php if (isset($_SESSION['email'])) : ?>
 <header class="page-header">
     <?php include('include/navbar.php'); ?>
+    <link rel="stylesheet" href="assets/css/dashboard.css">
 </header>
 
 
 <?php endif ?>
 <section class="page-content">
-    <section class="btn-group">
-        <h2>System Administrator</h2> <br>
-    </section>
-
-    <section class="grid">
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    
+    <div class="p-1 my-container active-cont">
+        <div class="center-container container" style='background-color:transparent; box-shadow:none;'>
+        
+        <?php 
+            $query = mysqli_query($db,"SELECT * FROM admission_officer");
+            $admission_officers = $query->num_rows;
+            $query = mysqli_query($db,"SELECT * FROM college");
+            $colleges = $query->num_rows;
+            $query = mysqli_query($db,"SELECT * FROM coursestbl");
+            $courses = $query->num_rows;
+            // $computer=mysqli_fetch_array($record);
+            // if(isset($computer)){
+            //     $computer_id = $computer['id'];
+            //     $lab_id = $computer['lab'];
+            // }
+        ?>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 p-2">
+                    <div class="dashboard-module dashboard-module-sm">
+                        <div class="dashboard-label">
+                            Admission Officers Registered
+                        </div>
+                        <div class="dashboard-value">
+                            <?php echo $admission_officers; ?>
+                        </div>
+                    </div> 
                 </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-
+                <div class="col-md-6 col-lg-3 p-2">
+                    <div class="dashboard-module dashboard-module-sm">
+                        <div class="dashboard-label">
+                            Colleges Registered
+                        </div>
+                        <div class="dashboard-value">
+                            <?php echo $colleges; ?>
+                        </div>
+                    </div> 
                 </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <!-- empty -->
+                <div class="col-md-6 col-lg-3 p-2">
+                    <div class="dashboard-module dashboard-module-sm">
+                        <div class="dashboard-label">
+                            Courses Registered
+                        </div>
+                        <div class="dashboard-value">
+                            <?php echo $courses; ?>
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-md-6 col-lg-3 p-2">
+                    <div class="dashboard-module dashboard-module-sm">
+                        <div class="dashboard-label">
+                            Current Admission Schedule
+                        </div>
+                        <div class="dashboard-value" style='font-size:21px;'>
+                            <?php 
+                                $record = mysqli_query($db, "SELECT * FROM admissionbatch WHERE is_active=1");
+                                $admission=mysqli_fetch_array($record);
+                                if(isset($admission)){
+                                    echo date('M d',strtotime($admission['start_date']))." to ".date('M d',strtotime($admission['end_date']))."<br> S.Y. ".$admission['schoolyear'];
+                                }
+                            ?>
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-md-6 col-lg-6 p-2">
+                    <div class="dashboard-module dashboard-module-lg">
+                        <canvas id="pie" style="max-height:100%; max-width:100%;"></canvas>
+                    </div> 
+                </div>
+                <div class="col-md-6 col-lg-6 p-2">
+                    <div class="dashboard-module dashboard-module-lg">
+                        <canvas id="bar" style="max-height:100%; max-width:100%;"></canvas>
+                    </div> 
+                </div>
+                <div class="col-md-12 col-lg-12 p-2">
+                    <div class="dashboard-module dashboard-module-lg">
+                        <canvas id="plots" style="width:100%;max-width:100%; max-height:100%;"></canvas>
+                    </div> 
                 </div>
             </div>
         </div>
-        <!--END  -->
-        <article>
-            <div
-                class="table table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl mx-3 my-3">
-                <table class="table table-sm table-striped table-bordered table-hover" id="list_course">
-                    <thead class="thead">
-                        <?php $results = mysqli_query($db, "SELECT * from coursestbl") ?>
-                        <tr>
-                            <th>ID</th>
-                            <th> Img </th>
-                            <th>Course</th>
-                            <th>Slots</th>
-                            <th>CET REQUIREMENTS</th>
-                            <th>GPA REQUIREMENTS</th>
-                            <th>Action</th>
-
-                        </tr>
-
-
-                    </thead>
-                    <tbody class="tbody">
-                        <?php while ($row = mysqli_fetch_array($results)) { ?>
-                        <tr>
-
-                            <td><?php echo $row['course_id']; ?> </td>
-                            <td>
-                                <nobr> <img src="../collegeimg/<?php echo $row['course_img'];?>" alt="..."
-                                        class="img img-fluid" width="40"></nobr>
-                            </td>
-                            <td><?php echo $row['course_name']; ?> </td>
-                            <td><?php echo $row['quota']; ?> </td>
-                            <td><?php echo $row['cet_req']; ?></td>
-                            <td><?php echo $row['gpa_req']; ?></td>
-
-
-                            <td>
-                                <a href="qualified.php?course=<?php echo $row['course_id']; ?>"
-                                    class="btn btn-primary btn-sm"> <i class="fa-solid fa-eye"></i></a>
-                           
-                                <button type="submit" name=""
-                                    class="btn btn-success btn-sm settingsBtn"><i class="fas fa-cog"></i></button>
-                            </td>
-
-                        </tr>
-                        <?php
-            }
-            ?>
-                    </tbody>
-                </table>
-
-
-        </article>
-    </section>
+    </div>
 </section>
 </body>
 
@@ -123,4 +130,135 @@ $(document).ready(function() {
     });
 
 });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+        // Get the HTML canvas by its id 
+        plots = document.getElementById("plots");
+        pie = document.getElementById("pie");
+        bar = document.getElementById("bar");
+
+        // Example datasets for X and Y-axes 
+        <?php
+            $days = [];
+            $sessions = [];
+            $dayindex = 0;
+            for($i = 0; $i < 7; $i++){
+                $sessions_count = mysqli_query($db,"SELECT * FROM application_log WHERE date = CURDATE() - INTERVAL $dayindex DAY");
+                $day = mysqli_fetch_array(mysqli_query($db,"SELECT DAYNAME(CURDATE() - INTERVAL $dayindex DAY) AS week_day"));
+                $days[$i] = $day['week_day'];
+                $sessions[$i] = mysqli_num_rows($sessions_count);
+                $dayindex++;
+            }
+        ?>
+        var days = [<?php for($i = 6; $i >= 0; $i--){ echo '\''.$days[$i].'\''.','; } ?>]; //Stays on the X-axis 
+        var sales = [<?php for($i = 6; $i >= 0; $i--){ echo $sessions[$i].','; } ?>] //Stays on the Y-axis 
+
+        // Create an instance of Chart object:
+        new Chart(plots, {
+                options: {
+                    plugins:{
+                        title:{
+                            display:true,
+                            text: 'Application Qty. for the Past Week',
+                        },
+                    },
+                },
+                type: 'line', //Declare the chart type 
+                data: {
+                labels: days, //X-axis data 
+                datasets: [{
+                    label:'Reservations',
+                    data: sales, //Y-axis data 
+                    backgroundColor: '#003300',
+                    borderColor: 'black',
+                    tension: 0.3,
+                    fill: false, //Fills the curve under the line with the babckground color. It's true by default
+                }]
+            },
+        });
+
+        
+        <?php
+            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='PENDING'");
+            $duration_1=mysqli_num_rows($sql);
+            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='PREQUALIFIED'");
+            $duration_2=mysqli_num_rows($sql);
+            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='QUALIFIED'");
+            $duration_3=mysqli_num_rows($sql);
+            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='INTERVIEW'");
+            $duration_4=mysqli_num_rows($sql);
+        ?>
+        new Chart(pie, {
+                options: {
+                    plugins:{
+                        title:{
+                            display:true,
+                            text: 'Session Duration Distribution',
+                        },
+                    },
+                },
+                type: 'doughnut', //Declare the chart type 
+                data: {
+                labels: [
+                    'Pending',
+                    'Prequalified',
+                    'Qualified',
+                    'Interview',
+                ],
+                datasets: [{
+                    label:'Carts',
+                    data:[<?php echo $duration_1.",".$duration_2.",".$duration_3.",".$duration_4; ?>],
+                    backgroundColor: [
+                        'rgb(214, 31, 11)',
+                        'rgb(191, 212, 59)',
+                        'rgb(21, 232, 21)',
+                        'rgb(60, 125, 22)',
+                    ],
+                    borderColor: 'black',
+                    fill: false, //Fills the curve under the line with the babckground color. It's true by default
+                }]
+            },
+        });
+        
+        
+        <?php
+            $college_count = [];
+            $college_name = [];
+            $i = 0;
+            $colleges = mysqli_query($db,"SELECT * FROM college");
+            while($college = mysqli_fetch_array($colleges)){
+                $count = mysqli_query($db,"SELECT * FROM application_log WHERE college_id=".$college['college_id']);
+                $college_count[$i] = mysqli_num_rows($count);
+                $string = $college['college_name'];
+                $expr = '/(?<=\s|^)[A-Z]/';
+                preg_match_all($expr, $string, $matches);    
+                $result = implode('', $matches[0]);
+                $college_name[$i] = $result;
+                $i++;
+            }
+        ?>
+        new Chart(bar, {
+                options: {
+                    plugins:{
+                        title:{
+                            display:true,
+                            text: 'Applicant College Distribution',
+                        },
+                    },
+                },
+                type: 'bar', //Declare the chart type 
+                data: {
+                labels: [<?php for($i = 0; $i < count($college_count); $i++){ echo '\''.$college_name[$i].'\','; } ?>],
+                datasets: [{
+                    label:'Applicants',
+                    data:[<?php for($i = 0; $i < count($college_count); $i++){ echo '\''.$college_count[$i].'\''.','; } ?>],
+                    backgroundColor: [
+                        'rgb(125, 11, 25)',
+                    ],
+                    borderColor: 'black',
+                    fill: false, //Fills the curve under the line with the babckground color. It's true by default
+                }]
+            },
+        });
 </script>

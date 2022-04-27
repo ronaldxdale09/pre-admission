@@ -17,6 +17,7 @@ if ($row["college_img"] == ''){
  }
 
  $college = $row['college_name'];
+ $college_id = $row['college_id'];
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +32,7 @@ if ($row["college_img"] == ''){
     <link rel="stylesheet" href="assets/css/main.css">
   
     <link rel="stylesheet" href="../dist/css/btn.admin.css">
+    <link rel="stylesheet" href="assets/css/statistic-card.css">
 
 </head>
 

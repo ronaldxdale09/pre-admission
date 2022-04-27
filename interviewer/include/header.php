@@ -2,8 +2,6 @@
 include('../function/db.php');
 
 include('bootstrap.php');
-include('jquery.php'); 
-include('modal/modal.php');
 
 
 $evaluator = mysqli_query($db, "SELECT * from interviewer 

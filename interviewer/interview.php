@@ -146,7 +146,9 @@ include('include/header.php');
 </section>
 </body>
 
-<?php include('modal/modal.php') ?>
+<?php 
+include('include/jquery.php');
+include('modal/modal.php'); ?>
 
 
 

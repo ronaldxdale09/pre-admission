@@ -234,6 +234,7 @@ $w_counter = mysqli_fetch_array($waiting);
 <?php
 include('include/jquery.php');
 
+include('modal/modal.php');
 ?>
 
 

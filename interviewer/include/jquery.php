@@ -20,5 +20,6 @@
 <!-- for date filter -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
+<script src="assets/js/control.js"></script>
 
-<?php include('notification.php')?>
+<?php include('notification.php');?>

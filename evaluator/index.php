@@ -1,5 +1,15 @@
 <?php
 include('include/header.php');
+
+    
+$pending = mysqli_query($db, "SELECT COUNT(*) from selectedcourse where college_id ='$college_id' and academic_id ='$academic_id' and userStatus='PENDING' "); 
+$p_counter = mysqli_fetch_array($pending);
+
+$rejected = mysqli_query($db, "SELECT COUNT(*) from selectedcourse where college_id ='$college_id' and academic_id ='$academic_id' and userStatus='REJECTED' "); 
+$r_counter = mysqli_fetch_array($rejected);
+
+$prequalified = mysqli_query($db, "SELECT COUNT(*) from selectedcourse where college_id ='$college_id' and academic_id ='$academic_id' and userStatus='PREQUALIFIED' "); 
+$pre_counter = mysqli_fetch_array($prequalified);
 ?>
 
 <?php if (isset($_SESSION['email'])) : ?>
@@ -48,6 +58,81 @@ include('include/header.php');
     </section>
     <h3 class="section-name">Applications List</h3>
     <section class="grid">
+
+      
+    <div class="row">
+    <div class="col-sm-3 offset-sm-0">
+       <div class="stat-card">
+          <div class="stat-card__content">
+             <p class="text-uppercase mb-1 text-muted">Pending Application </p>
+             <h2 ><i class="text-danger font-weight-bold mr-1"></i>
+                    <?php echo    $p_counter[0] ?> </h2>
+         
+          </div>
+          <div class="stat-card__icon stat-card__icon--success">
+             <div class="stat-card__icon-circle">
+                <i class="fa fa-info"  aria-hidden="true"></i>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="col-sm-3">
+       <div class="stat-card">
+          <div class="stat-card__content">
+             <p class="text-uppercase mb-1 text-muted">Rejected</p>
+             <h2> <?php echo    $r_counter[0] ?> </h2>
+
+          </div>
+          <div class="stat-card__icon stat-card__icon--primary">
+             <div class="stat-card__icon-circle">
+                <i class="fa fa-calendar"></i>
+             </div>
+          </div>
+       </div>
+    </div>
+
+        <div class="col-sm-3">
+       <div class="stat-card">
+          <div class="stat-card__content">
+             <p class="text-uppercase mb-1 text-muted">Pre-Qualified</p>
+             <h2><?php echo $pre_counter[0] ?></h2>
+            
+          </div>
+          <div class="stat-card__icon stat-card__icon--primary">
+             <div class="stat-card__icon-circle">
+                <i class="fa fa-credit-card"></i>
+             </div>
+          </div>
+       </div>
+    </div>
+
+
+ </div>   
+
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                <h6 style='margin-bottom:0px;'>
+                  Current Active Admission Schedule: <?php
+                     if(isset($admission)){
+                         echo date('M d',strtotime($admission['start_date']))." to ".date('M d',strtotime($admission['end_date'])).", S.Y. ".$admission['schoolyear'];
+                     }
+                     ?>
+               </h6>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                
+                </div>
+            </div>
+        </div>
         <article>
             <div
                 class="table table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl mx-3 my-3">

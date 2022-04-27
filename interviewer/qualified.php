@@ -1,10 +1,15 @@
 <?php
 include('include/header.php');
+
+
+
+
+
 ?>
 
 <?php if (isset($_SESSION['email'])) : ?>
 <header class="page-header">
-    <nav>
+<nav>
         <button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
             <i class="fa fa-bars"></i>
         </button>
@@ -13,21 +18,22 @@ include('include/header.php');
         </a>
         <ul class="admin-menu">
             <li class="menu-heading">
-                <h3>Prequalified List</h3>
+                <h3>Qualified Students</h3>
             </li>
             <li>
                 <a href="index.php">
-                    <i class="fa fa-list" aria-hidden="true"><span>Applications</span></i>
+                    <i class="fa fa-list" aria-hidden="true"><span>PREQUALIFIED</span></i>
                 </a>
             </li>
 
             <li>
-                <a href="interview.php" class="active">
+                <a href="interview.php" >
                     <i class="fa fa-list" aria-hidden="true"><span>INTERVIEW</span></i>
                 </a>
             </li>
+
             <li>
-                <a href="qualified.php" >
+                <a href="qualified.php" class="active">
                     <i class="fa fa-list" aria-hidden="true"><span>QUALIFIED</span></i>
                 </a>
             </li>
@@ -37,6 +43,7 @@ include('include/header.php');
                     <i class="fa fa-list" aria-hidden="true"><span>WAITING</span></i>
                 </a>
             </li>
+
             <li>
                 <a href="../index.php?logout='1'">
                     <i class="fa fa-sign-out"><span>logout</span></i>
@@ -48,70 +55,93 @@ include('include/header.php');
 <?php endif ?>
 <section class="page-content">
     <section class="btn-group">
-        <h2>Interview | <?php echo $college ?></h2> <br>
+        <h2><?php echo $college ?> </h2> <br>
 
 
     </section>
-    <h3 class="section-name">Interview List</h3>
+    <h3 class="section-name">QUALIFIED STUDENTS LIST</h3>
     <section class="grid">
+
+    
+
+
+   <section class="grid">
+      <div class="row">
+         <div class="col">
+            <div class="form-group">
+              
+            </div>
+         </div>
+         <div class="col">
+            <div class="form-group">
+            </div>
+         </div>
+         <div class="col">
+            <div class="form-group">
+            <h6 style='margin-bottom:0px;'>
+                  Current Active Admission Schedule: <?php
+                     if(isset($admission)){
+                         echo date('M d',strtotime($admission['start_date']))." to ".date('M d',strtotime($admission['end_date'])).", S.Y. ".$admission['schoolyear'];
+                     }
+                     ?>
+               </h6>
+            </div>
+         </div>
+      </div>
+      <!--END  -->
         <article>
             <div
                 class="table table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl mx-3 my-3">
-                <table class="table table-sm table-striped table-bordered table-hover" id="interview_table">
+                <table class="table table-sm table-striped table-bordered table-hover" id="printable-table">
                     <thead class="thead">
                         <?php $results = mysqli_query($db, "SELECT * from selectedcourse LEFT JOIN users ON selectedcourse.user_id = users.id
                      LEFT JOIN coursestbl ON selectedcourse.course_id = coursestbl.course_id
-                     LEFT JOIN schedule_interview ON selectedcourse.interview_sched = schedule_interview.schedule_interview_id
                      LEFT JOIN college ON selectedcourse.college_id = college.college_id
-                     LEFT JOIN attachment ON selectedcourse.file_id = attachment.id WHERE userStatus='INTERVIEW'
-                     AND  college_name = '$college' AND  inter_score IS NULL ") ?>
+                     LEFT JOIN attachment ON selectedcourse.file_id = attachment.id WHERE userStatus='QUALIFIED'
+                     AND  college_name = '$college' ") ?>
                         <tr>
-                            <th hidden></th>
-                            <th hidden></th>
-                            <th hidden></th>
-                            <th hidden></th>
-                            <th hidden></th>
-                            <th hidden></th>
-                            <th hidden></th>
-                            <th hidden></th>
-                            <th>Interview Date</th>
-                            <th>Interview Time</th>
+                        <th hidden> </th>
                             <th>FirstName</th>
                             <th>LastName</th>
                             <th>Course</th>
                             <th>Student Type</th>
                             <th>Cet</th>
                             <th>Gpa</th>
-                            <th>Action</th>
-                        </tr>
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            
+                            <th hidden> </th>
 
-                        <th hidden></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>       
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th hidden></th>
-                        <th hidden></th>
-                        <th hidden></th>
-                        <th hidden></th>
-                        <th hidden></th>
-                        <th hidden></th>
-                        <th hidden></th>
-                        <th hidden></th>
-                        <th></th>
+                        </tr>
+                        <th hidden> </th>
+                        <th>
+                        <th>
+                        <th>
+                        <th>
+                        <th>
+                        <th>
+                     
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            <th hidden> </th>
+                            <th hidden> </th>
+
 
                     </thead>
                     <tbody class="tbody">
                         <?php while ($row = mysqli_fetch_array($results)) { ?>
                         <tr>
 
-                            <td style="display:none"><?php echo $row['selectedCourse_id']; ?> </td>
-                            <td><?php echo $row['interview_date']; ?> </td>
-                            <td><?php echo $row['interview_time']; ?> </td>
+                            <td style="display:none"><?php echo $row['user_id']; ?> </td>
                             <td><?php echo $row['fname']; ?> </td>
                             <td><?php echo $row['lname']; ?> </td>
                             <td><?php echo $row['course_name']; ?></td>
@@ -127,18 +157,14 @@ include('include/header.php');
                             <td style="display:none"><?php echo $row['gpa_path']; ?></td>
                             <td style="display:none"><?php echo $row['gmoral_path']; ?></td>
 
-                            <td>
-
-                                <button type="submit" name="" class="btn btn-success profileShow">Profile</button>
-                                <button type="submit" name="" class="btn btn-primary scoreBtn">Score</button>
-                            </td>
-                            <!-- <td><input type="number" name="score" class="form-control scoreInput"></td> -->
-
-                            <!-- data-toggle="modal" data-target="#selectAction" -->
+                           
                         </tr>
                         <?php
             }
             ?>
+
+
+
                     </tbody>
                 </table>
         </article>
@@ -204,61 +230,11 @@ $(document).ready(function() {
 
 
 <script>
-//TRANSFER DATA FROM TABLE TO MODAL
-$(document).ready(function() {
-    $('.scoreBtn').on('click', function() {
-
-
-        $('#score').modal('show');
-        $tr = $(this).closest('tr');
-
-        var data = $tr.children("td").map(function() {
-            return $(this).text();
-        }).get();
-        $('#id1').val(data[0]);
-        $('#fname1').val(data[1]);
-        $('#lname1').val(data[2]);
-        $('#course1').val(data[3]);
-        $('#cet1').val(data[5]);
-        $('#gpa1').val(data[6]);
-
-
-    });
-
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    // Country dependent ajax
-    $("#course").on("change", function() {
-        var courseId = $(this).val();
-
-        $.ajax({
-            url: "modal/fetchInterviewer.php",
-            type: "POST",
-            cache: false,
-            data: {
-                courseId: courseId
-            },
-            cache: false,
-            success: function(course) {
-                $("#interviewer_section").html(course);
-            }
-        });
-
-    });
-});
-</script>
-
-
-
-<script>
 $(document).ready(function() {
     // Create date inputs
 
     // DataTables initialisation
-    var table = $('#interview_table').DataTable({
+    var table = $('#printable-table').DataTable({
         "ordering": false,
 
         dom: 'Bfrtip',
@@ -272,7 +248,7 @@ $(document).ready(function() {
 
         ],
         initComplete: function() {
-            this.api().columns([1,2,5]).every(function() {
+            this.api().columns([3]).every(function() {
                 var column = this;
                 var select = $(
                         ' <select  class="form-control action" required> <option value="">All</option></select>'

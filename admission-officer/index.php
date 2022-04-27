@@ -9,6 +9,9 @@
    $collegeCounter = mysqli_query($db, "SELECT COUNT(*) from selectedcourse where college_id ='$college_id' and academic_id ='$academic_id' "); 
    $c_counter = mysqli_fetch_array($collegeCounter);
 
+   $waitingList = mysqli_query($db, "SELECT COUNT(*) from selectedcourse where college_id ='$college_id' and academic_id ='$academic_id' and userStatus='WAITING' "); 
+   $w_counter = mysqli_fetch_array($waitingList);
+
    $courseCounter = mysqli_query($db, "SELECT COUNT(*) from coursestbl where college_id ='$college_id' "); 
    $course_Counter = mysqli_fetch_array($courseCounter);
 
@@ -87,10 +90,8 @@
        <div class="stat-card">
           <div class="stat-card__content">
              <p class="text-uppercase mb-1 text-muted">Waiting List</p>
-             <h2>₱ 2323</h2>
-             <div>
-                <span class="text-muted">OVERALL EXPENSES</span>
-             </div>
+             <h2><?php echo $w_counter[0] ?></h2>
+            
           </div>
           <div class="stat-card__icon stat-card__icon--primary">
              <div class="stat-card__icon-circle">

@@ -54,47 +54,41 @@
             </h6>
             <hr>
             <div style='margin:0; padding:0;'>
-               <button class='btn btn-success' data-toggle="modal" data-target="#newInterviewer" style='margin-right:10px;'>Add New Officer</button>
-               <button class='btn btn-primary open-schedule-modal'>Create New Admission Schedule</button>
+               <button class='btn btn-success' data-toggle="modal" data-target="#newInterviewer" style='margin-right:10px;'>Add New Interviewer</button>
             </div>
          </div>
          <div style='padding:10px;'>
             <table class="table table-sm table-striped table-bordered table-hover" id="list_course">
                <thead class="thead">
                   <?php 
-                     $results = mysqli_query($db, "SELECT * FROM admission_officer INNER JOIN users INNER JOIN college WHERE admission_officer.user_id = users.id AND admission_officer.college_id = college.college_id");
+                     $results = mysqli_query($db, "SELECT * FROM interviewer INNER JOIN users INNER JOIN college WHERE interviewer.user_id = users.id AND interviewer.college_id = college.college_id");
                      ?>
                   <tr>
                      <th style='width:10%;'>ID</th>
                      <th style='width:40%;'>Name</th>
-                     <th style='width:50%;'>College</th>
+                     <th style='width:40%;'>Course</th>
+                     <th >Action</th>
                   </tr>
                </thead>
                <tbody class="tbody">
                   <?php 
                      while ($row = mysqli_fetch_array($results)) { 
                      ?>
-                  <tr class='trow' id='<?php echo $row['ao_id']; ?>'>
+                  <tr class='trow' id='<?php echo $row['interviewer_id']; ?>'>
                      <td style='width:10%;' id='course-id-<?php echo $row['ao_id']; ?>'>
-                        <?php echo $row['ao_id']; ?> 
+                        <?php echo $row['interviewer_id']; ?> 
                      </td>
                      <td style='width:40%;' id='course-name-<?php echo $row['ao_id']; ?>'>
                         <?php echo $row['fname']." ".$row['lname']; ?> 
                      </td>
-                     <td style='width:50%;position:relative;' id='course-description-<?php echo $row['ao_id']; ?>'>
+                     <td style='width:40%;position:relative;' id='course-description-<?php echo $row['ao_id']; ?>'>
                         <?php echo $row['college_name']; ?> 
-                        <div class='trow-btn-container'>
+                     </td>
+                     <td>
+                  
                            <button class="btn btn-primary trow-btn open-edit-modal" style='margin-right:5px' name='<?php echo $row['ao_id']; ?>'><i class="fa-solid fa-pen-to-square"></i></button>
                            <button class="btn btn-danger trow-btn open-delete-modal" name='<?php echo $row['ao_id']; ?>'><i class="fa-solid fa-trash-can"></i></button>
-                        </div>
-                        <div id="hidden-inputs" style='display:none;'>
-                           <input type="text" id='user-<?php echo $row['ao_id']; ?>' value='<?php echo $row['id']; ?>'>
-                           <input type="text" id='fname-<?php echo $row['ao_id']; ?>' value='<?php echo $row['fname']; ?>'>
-                           <input type="text" id='lname-<?php echo $row['ao_id']; ?>' value='<?php echo $row['lname']; ?>'>
-                           <input type="text" id='email-<?php echo $row['ao_id']; ?>' value='<?php echo $row['email']; ?>'>
-                           <input type="text" id='contactno-<?php echo $row['ao_id']; ?>' value='<?php echo $row['contactNo']; ?>'>
-                           <input type="text" id='address-<?php echo $row['ao_id']; ?>' value='<?php echo $row['address']; ?>'>
-                        </div>
+        
                      </td>
                   </tr>
                   <?php
@@ -110,6 +104,54 @@
 
 
 </body>
+
+
+<!-- modal -->
+<!-- SCORE ACTION -->
+<div class="modal fade" id="newInterviewer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style='background-color:rgba(0, 0, 0, 0.37);' aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">INTERVIEW SCORE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="function/interviewerNew.php" method="POST">
+        <div class="modal-body">
+          <input type="text" name="college_id" value="<?php echo $college_id ?>" hidden>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="IDofInput">First Name</label>
+              <input type="text" name="fname" id="fname" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label for="IDofInput2">Last Name</label>
+              <input type="text" name="lname" id="lname" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email :</label>
+            <input type="email" name="email" id="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Password :</label>
+            <input type="password" name="password" id="password" class="form-control">
+          </div>
+          <hr>
+          <br>
+          <!-- attached -->
+        </div>
+        <div class="modal-footer">
+          <button type="accept" name="interviewer" class="btn btn-success">REGISTER</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- modal end -->
 <?php
    include('include/jquery.php');
    include('modal/modal.php');

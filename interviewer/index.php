@@ -1,6 +1,15 @@
 <?php
 include('include/header.php');
  
+    
+$prequalified = mysqli_query($db, "SELECT COUNT(*) from selectedcourse where college_id ='$college_id' and academic_id ='$academic_id' and userStatus='PREQUALIFIED' "); 
+$p_counter = mysqli_fetch_array($prequalified);
+
+$interview = mysqli_query($db, "SELECT COUNT(*) from selectedcourse where college_id ='$college_id' and academic_id ='$academic_id' and userStatus='INTERVIEW' "); 
+$i_counter = mysqli_fetch_array($interview);
+
+$waiting = mysqli_query($db, "SELECT COUNT(*) from selectedcourse where college_id ='$college_id' and academic_id ='$academic_id' and userStatus='WAITING' "); 
+$w_counter = mysqli_fetch_array($waiting);
 ?>
 
 <?php if (isset($_SESSION['email'])) : ?>
@@ -28,6 +37,18 @@ include('include/header.php');
             </li>
 
             <li>
+                <a href="qualified.php" >
+                    <i class="fa fa-list" aria-hidden="true"><span>QUALIFIED</span></i>
+                </a>
+            </li>
+
+            <li>
+                <a href="waiting.php" >
+                    <i class="fa fa-list" aria-hidden="true"><span>WAITING</span></i>
+                </a>
+            </li>
+
+            <li>
                 <a href="../index.php?logout='1'">
                     <i class="fa fa-sign-out"><span>logout</span></i>
                 </a>
@@ -47,6 +68,58 @@ include('include/header.php');
     <h3 class="section-name">Prequalified List</h3>
     <section class="grid">
 
+
+    
+    <div class="row">
+    <div class="col-sm-3 offset-sm-0">
+       <div class="stat-card">
+          <div class="stat-card__content">
+             <p class="text-uppercase mb-1 text-muted">Prequalified Application </p>
+             <h2 ><i class="text-danger font-weight-bold mr-1"></i>
+                    <?php echo    $p_counter[0] ?> </h2>
+         
+          </div>
+          <div class="stat-card__icon stat-card__icon--success">
+             <div class="stat-card__icon-circle">
+                <i class="fa fa-info"  aria-hidden="true"></i>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="col-sm-3">
+       <div class="stat-card">
+          <div class="stat-card__content">
+             <p class="text-uppercase mb-1 text-muted">Waiting for Interview</p>
+             <h2> <?php echo    $i_counter[0] ?> </h2>
+
+          </div>
+          <div class="stat-card__icon stat-card__icon--primary">
+             <div class="stat-card__icon-circle">
+                <i class="fa fa-calendar"></i>
+             </div>
+          </div>
+       </div>
+    </div>
+
+        <div class="col-sm-3">
+       <div class="stat-card">
+          <div class="stat-card__content">
+             <p class="text-uppercase mb-1 text-muted">Waiting List</p>
+             <h2><?php echo $w_counter[0] ?></h2>
+            
+          </div>
+          <div class="stat-card__icon stat-card__icon--primary">
+             <div class="stat-card__icon-circle">
+                <i class="fa fa-credit-card"></i>
+             </div>
+          </div>
+       </div>
+    </div>
+
+
+ </div>   
+
+
         <div class="row">
             <div class="col">
                 <div class="form-group">
@@ -60,7 +133,13 @@ include('include/header.php');
             </div>
             <div class="col">
                 <div class="form-group">
-                    <!-- empty -->
+                <h6 style='margin-bottom:0px;'>
+                  Current Active Admission Schedule: <?php
+                     if(isset($admission)){
+                         echo date('M d',strtotime($admission['start_date']))." to ".date('M d',strtotime($admission['end_date'])).", S.Y. ".$admission['schoolyear'];
+                     }
+                     ?>
+               </h6>
                 </div>
             </div>
         </div>

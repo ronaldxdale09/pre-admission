@@ -17,6 +17,11 @@ if ($row["college_img"] == ''){
  }
 
  $college = $row['college_name'];
+ $college_id = $row['college_id'];
+
+ $record = mysqli_query($db, "SELECT * FROM admissionbatch WHERE is_active=1");
+ $admission=mysqli_fetch_array($record);
+ $academic_id =  $admission['admission_id'];
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +34,7 @@ if ($row["college_img"] == ''){
 
     
     <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/statistic-card.css">
   
     <link rel="stylesheet" href="../dist/css/btn.admin.css">
 

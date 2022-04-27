@@ -40,7 +40,7 @@
 
     <script>
     Swal.fire(
-        'Welcome!',
+        'QUALIFIED',
         'Interview Sucessfull',
     )
     </script>
@@ -48,6 +48,23 @@
 
     <?php 
 			unset($_SESSION['interview']);
+		?>
+</div>
+<?php endif ?>
+
+<?php if (isset($_SESSION['waiting'])): ?>
+<div class="msg">
+
+    <script>
+    Swal.fire(
+        'Course Quota is Full',
+        'This student is move to the waiting list',
+    )
+    </script>
+
+
+    <?php 
+			unset($_SESSION['waiting']);
 		?>
 </div>
 <?php endif ?>

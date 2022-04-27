@@ -1,5 +1,8 @@
 <?php
 include('include/header.php');
+$record = mysqli_query($db, "SELECT * FROM admissionbatch WHERE is_active=1");
+$admission=mysqli_fetch_array($record);
+$academic_id =  $admission['admission_id'];
  
 ?>
 
@@ -66,8 +69,7 @@ include('include/header.php');
                         </div>
                         <div class="dashboard-value" style='font-size:21px;'>
                             <?php 
-                                $record = mysqli_query($db, "SELECT * FROM admissionbatch WHERE is_active=1");
-                                $admission=mysqli_fetch_array($record);
+                               
                                 if(isset($admission)){
                                     echo date('M d',strtotime($admission['start_date']))." to ".date('M d',strtotime($admission['end_date']))."<br> S.Y. ".$admission['schoolyear'];
                                 }
@@ -144,7 +146,7 @@ $(document).ready(function() {
             $sessions = [];
             $dayindex = 0;
             for($i = 0; $i < 7; $i++){
-                $sessions_count = mysqli_query($db,"SELECT * FROM application_log WHERE date = CURDATE() - INTERVAL $dayindex DAY");
+                $sessions_count = mysqli_query($db,"SELECT * FROM application_log WHERE  academic_id ='$academic_id' and date = CURDATE() - INTERVAL $dayindex DAY");
                 $day = mysqli_fetch_array(mysqli_query($db,"SELECT DAYNAME(CURDATE() - INTERVAL $dayindex DAY) AS week_day"));
                 $days[$i] = $day['week_day'];
                 $sessions[$i] = mysqli_num_rows($sessions_count);
@@ -180,13 +182,13 @@ $(document).ready(function() {
 
         
         <?php
-            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='PENDING'");
+            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='PENDING' and academic_id ='$academic_id'");
             $duration_1=mysqli_num_rows($sql);
-            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='PREQUALIFIED'");
+            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='PREQUALIFIED' and academic_id ='$academic_id'");
             $duration_2=mysqli_num_rows($sql);
-            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='QUALIFIED'");
+            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='QUALIFIED' and academic_id ='$academic_id'");
             $duration_3=mysqli_num_rows($sql);
-            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='INTERVIEW'");
+            $sql = mysqli_query($db,"SELECT * FROM application_log WHERE userStatus='INTERVIEW' and academic_id ='$academic_id'");
             $duration_4=mysqli_num_rows($sql);
         ?>
         new Chart(pie, {
@@ -228,7 +230,7 @@ $(document).ready(function() {
             $i = 0;
             $colleges = mysqli_query($db,"SELECT * FROM college");
             while($college = mysqli_fetch_array($colleges)){
-                $count = mysqli_query($db,"SELECT * FROM application_log WHERE college_id=".$college['college_id']);
+                $count = mysqli_query($db,"SELECT * FROM application_log WHERE  academic_id ='$academic_id' and college_id=".$college['college_id']);
                 $college_count[$i] = mysqli_num_rows($count);
                 $string = $college['college_name'];
                 $expr = '/(?<=\s|^)[A-Z]/';

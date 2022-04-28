@@ -1,7 +1,6 @@
 <?php 
 include('../function/db.php');
 include('bootstrap.php');
-include('jquery.php');
 
 $evaluator = mysqli_query($db, "SELECT * from evaluator 
   LEFT JOIN college ON evaluator.college_id = college.college_id
@@ -39,45 +38,3 @@ if ($row["college_img"] == ''){
 </head>
 
 <body>
-    <?php  if (isset($_SESSION['email'])) : ?>
-    <header class="page-header">
-        <nav>
-          <button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
-            <i class="fa fa-bars"></i>
-          </button>
-          <a href="../index.html">
-            <img class="logo mx-auto" src="../collegeimg/<?php echo $row['college_img']?>" alt="ics logo">
-          </a>
-          <ul class="admin-menu">
-            <li class="menu-heading">
-              <h3>APPLICANTS LIST</h3>
-            </li>
-            <li>
-                <a href="coe.evaluator.main.php" class="active">
-                    <i class="fa fa-list" aria-hidden="true"><span>Applications</span></i>
-                </a>
-            </li>
-            <li>
-              <a href="coe.evaluator.pre.php">
-                <i class="fa fa-list" aria-hidden="true"><span>Prequalified</span></i>
-              </a>
-            </li>
-            <li>
-              <a href="coe.evaluator.rej.php">
-                <i class="fa fa-thumbs-o-down" aria-hidden="true"><span>Rejected</span></i>
-              </a>
-            </li>
-            <li>
-              <a href="coe.evaluator.cancel.php">
-              <i class="fa fa-ban" aria-hidden="true"><span>Cancelled</span></i>
-              </a>
-            </li>
-            <li>
-              <a href="../index.php?logout='1'">
-                <i class="fa fa-sign-out"><span>logout</span></i>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <?php endif ?>

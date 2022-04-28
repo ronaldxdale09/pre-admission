@@ -2,7 +2,6 @@
 include('../function/db.php');
 
 include('bootstrap.php');
-include('jquery.php'); 
 include('modal/modal.php');
 
 

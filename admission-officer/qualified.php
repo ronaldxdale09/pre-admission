@@ -117,7 +117,9 @@ if (isset($_GET['course'])) {
 </section>
 </body>
 
-<?php include('modal/modal.php') ?>
+<?php include('modal/modal.php');
+include('include/jquery.php');
+ ?>
 
 
 

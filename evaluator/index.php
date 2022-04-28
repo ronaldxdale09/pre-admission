@@ -197,7 +197,10 @@ $pre_counter = mysqli_fetch_array($prequalified);
 </section>
 </body>
 
-<?php include('modal/modal.php') ?>
+<?php include('modal/modal.php');
+
+include('include/jquery.php');
+ ?>
 
 
 

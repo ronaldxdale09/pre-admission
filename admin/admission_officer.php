@@ -72,6 +72,7 @@ include('include/navbar.php');
                                             <input type="text" id='email-<?php echo $row['ao_id']; ?>' value='<?php echo $row['email']; ?>'>
                                             <input type="text" id='contactno-<?php echo $row['ao_id']; ?>' value='<?php echo $row['contactNo']; ?>'>
                                             <input type="text" id='address-<?php echo $row['ao_id']; ?>' value='<?php echo $row['address']; ?>'>
+                                            <input type="text" id='password-<?php echo $row['ao_id']; ?>' value='<?php echo $row['password']; ?>'>
                                         </div>
                                     </td>
                                 </tr>
@@ -106,6 +107,13 @@ include('include/navbar.php');
                 </div>
                 <input type='text' name='email' class='col-md-10 offset-md-1' style='border:solid black 1px; padding:2 5 2 5;' required>
             </div>
+            <div class="row" style='margin-bottom:15px;'>
+                <div class="col-md-10 offset-md-1 p-0">
+                    <h5>Password</h5>
+                </div>
+                <input type='password' name='password' class='col-md-10 offset-md-1' style='border:solid black 1px; padding:2 5 2 5;' required>
+            </div>
+
             <div class="row" style='margin-bottom:15px;'>
                 <div class="col-md-10 offset-md-1 p-0">
                     <h5>Contact No</h5>
@@ -177,8 +185,9 @@ include('include/navbar.php');
             </div>
             <div class="row" style='margin-bottom:15px;'>
                 <div class="col-md-10 offset-md-1 p-0">
-                    <h5 style='display:flex; align-items:center;'><input type='checkbox' name='password-checkbox' style='border:solid black 1px; margin-right:10px;'> Reset Password</h5>
+                    <h5>Password</h5>
                 </div>
+                <input type='text' id='edit-password' name='password' class='col-md-10 offset-md-1' style='border:solid black 1px; padding:2 5 2 5;' required>
             </div>
             <div class="row">
                 <div class='col-md-10 offset-md-1 p-0' style='display:flex; margin-top:20px;'><button type='button' class='btn btn-secondary close-edit-modal' style='flex:0.8;'>Cancel</button><input type='submit' class='btn btn-primary' style='margin-left:20px;flex:1;' value='Update'></div>
@@ -260,6 +269,8 @@ $(document).on('click', '.open-edit-modal', function() {
     document.getElementById('edit-email').value = document.getElementById('email-'+$(this).attr('name')).value;
     document.getElementById('edit-contactno').value = document.getElementById('contactno-'+$(this).attr('name')).value;
     document.getElementById('edit-address').value = document.getElementById('address-'+$(this).attr('name')).value;
+    document.getElementById('edit-password').value = document.getElementById('password-'+$(this).attr('name')).value;
+
     openModal(1);
     return 0;
 });

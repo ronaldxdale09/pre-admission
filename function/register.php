@@ -11,16 +11,17 @@
     
                             $type = $_POST['studentType'];
                           
-                            // $select    = "SELECT * FROM `users` WHERE email='$email'
-                            // AND password='$password'";
-                            // $result = mysqli_query($db, $query) or die(mysql_error());
-                            // $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
+                          
                             $query = "INSERT INTO users (applicantid,fname, lname,email,password, user_type,studentType) 
                             VALUES ('$appId','$fname','$lname','$email', '$password', 'user','$type')";
                                 $results = mysqli_query($db, $query);
                                     if ($results) {
 
+                                        $select    = "SELECT * FROM `users` WHERE email='$email'
+                                        AND password='$password'";
+                                        $result = mysqli_query($db, $select) or die(mysql_error());
+                                        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+            
 
                                         $_SESSION['email'] = $email;
                                         $_SESSION['id'] = $row['id'];
@@ -30,10 +31,10 @@
                                         $_SESSION['login'] = "login successful"; 
 
                                         header("Location: ../student/index.php");
-                                        exit();
+                                        
                                     } else {
                                         echo "ERROR: Could not be able to execute $query. ".msqli_error($con);
                                     }
-                                //exit();
+                                exit();
                                 }
  ?>

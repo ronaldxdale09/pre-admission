@@ -71,10 +71,8 @@
 
 
         } else {
-            echo "<div class='form'>
-                  <h3>Incorrect email/password.</h3><br/>
-                  <p class='link'>Click here to <a href='../index.php'>Login</a> again.</p>
-                  </div>";
+            $_SESSION['error'] = "error";
+            header("Location: ../index.php");
         }
     }
 ?>

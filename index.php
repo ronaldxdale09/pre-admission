@@ -1,4 +1,5 @@
-
+<?php include('function/db.php');
+ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -14,6 +15,12 @@
         
 </head>
 <body>
+
+
+<!-- sweetalert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 
     
@@ -47,9 +54,81 @@
     
     </div>
 
-    <script src="dist/jquery/jquery.min.js"></script>
-    <script src="dist/bootstrap4/js/bootstrap.bundle.min.js"></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js' integrity='sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM' crossorigin='anonymous'></script>
 
       
   </body>
 </html>
+
+
+
+
+<?php if (isset($_SESSION['error'])): ?>
+<div class="msg">
+
+    <script>
+   
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Incorrect Email or password!',
+ 
+})
+
+    </script>
+
+
+    <?php 
+			unset($_SESSION['error']);
+		?>
+</div>
+<?php endif ?>
+
+
+
+
+<?php if (isset($_SESSION['exist'])): ?>
+<div class="msg">
+
+    <script>
+   
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'This applicant has already been registered',
+ 
+})
+
+    </script>
+
+
+    <?php 
+			unset($_SESSION['exist']);
+		?>
+</div>
+<?php endif ?>
+
+
+<?php if (isset($_SESSION['unrecognized'])): ?>
+<div class="msg">
+
+    <script>
+   
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Incorrect Application ID',
+ 
+})
+
+    </script>
+
+
+    <?php 
+			unset($_SESSION['unrecognized']);
+		?>
+</div>
+<?php endif ?>
+
+

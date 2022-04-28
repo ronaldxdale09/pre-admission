@@ -18,17 +18,16 @@ include('db.php');
 
                   
                         if (mysqli_num_rows($checking_result) < 1) {
-                            echo "Sorry your we don't recognize your Applicant ID<br>";
-                            echo "<div class='form'>
-                            <p class='link pb-2'>Click here to <a href='cet_check.php'>Try again</a></p>
-                            </div>";
+                            
+                            $_SESSION['unrecognized'] ='unrecognized'; 
+                            header("location: ../index.php");
+                            
                         }
                         
                         else if (mysqli_num_rows($account_result) > 0) {
-                            echo "Account already exist";
-                            echo "<br><br><div class='form'>
-                            <p class='link pb-2'>Click here to <a href='cet_check.php'>Try again</a></p>
-                            </div>";
+                            $_SESSION['exist'] ='exist'; 
+                            header("location: ../index.php");
+                            
                         }
                         
                         else {

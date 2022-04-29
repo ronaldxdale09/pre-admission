@@ -43,6 +43,11 @@ include('include/header.php');
                     <i class="fa fa-list" aria-hidden="true"><span>WAITING</span></i>
                 </a>
             </li>
+            <li>
+            <a href="Schedule.php"   >
+            <i class="fa fa-calendar" aria-hidden="true"><span>SCHEDULE</span></i>
+            </a>
+         </li>
 
             <li>
                 <a href="../index.php?logout='1'">

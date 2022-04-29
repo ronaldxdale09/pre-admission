@@ -45,6 +45,13 @@ include('include/header.php');
             </li>
 
             <li>
+            <a href="Schedule.php"   >
+            <i class="fa fa-calendar" aria-hidden="true"><span>SCHEDULE</span></i>
+            </a>
+         </li>
+
+
+            <li>
                 <a href="../index.php?logout='1'">
                     <i class="fa fa-sign-out"><span>logout</span></i>
                 </a>

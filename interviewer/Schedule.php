@@ -3,6 +3,13 @@
    
    
    
+   $listOfCourse = "SELECT * FROM coursestbl WHERE college_id ='$college_id' ";
+   $result = mysqli_query($db, $listOfCourse);
+   $courses='';
+   while($arr = mysqli_fetch_array($result))
+   {
+   $courses .= '<option value="'.$arr["course_id"].'">'.$arr["course_name"].'</option>';
+   }
    
    
    ?>
@@ -35,8 +42,14 @@
             </a>
          </li>
          <li>
-            <a href="waiting.php"  class="active" >
+            <a href="waiting.php"  >
             <i class="fa fa-list" aria-hidden="true"><span>WAITING</span></i>
+            </a>
+         </li>
+
+         <li>
+            <a href="Schedule.php"  class="active" >
+            <i class="fa fa-calendar" aria-hidden="true"><span>SCHEDULE</span></i>
             </a>
          </li>
          <li>
@@ -155,22 +168,40 @@
             <span aria-hidden="true">&times;</span>
             </button>
          </div>
-         <form action="function/assign_sched.php" method="POST">
+         <form action="function/new_sched.php" method="POST">
             <div class="modal-body">
+
+            <input type='text'  name='college' value='<?php echo $college_id?>' hidden>
+
+
+            <div class="form-group">
+            <h5>Course</h5>
+                        <select name="course" id='course'class="form-control action college_list" style='border:solid black 1px; padding:2 5 2 5;' >
+                           <option disabled="disabled" selected="selected">Select Course</option>
+                           <?php echo $courses; ?>
+                        </select>
+                     </div>
 
 
                <div class="row" style='margin-bottom:15px;'>
                   <div class="col-md-10 offset-md-1 p-0">
                      <h5>Start Date</h5>
                   </div>
-                  <input type='date' id='date' name='date' class='col-md-10 offset-md-1' style='border:solid black 1px; padding:2 5 2 5;' onchange='validateDate()'>
+                  <input type='date' id='date' name='date' class='col-md-10 offset-md-1' style='border:solid black 1px; padding:2 5 2 5;' >
                </div>
 
                <div class="row" style='margin-bottom:15px;'>
                   <div class="col-md-10 offset-md-1 p-0">
                      <h5>Start Time</h5>
                   </div>
-                  <input type='time' id='time' name='time' class='col-md-10 offset-md-1' style='border:solid black 1px; padding:2 5 2 5;' onchange='validateDate()'>
+                  <input type='time' id='time' name='time' class='col-md-10 offset-md-1' style='border:solid black 1px; padding:2 5 2 5;' >
+               </div>
+
+               <div class="row" style='margin-bottom:15px;'>
+                  <div class="col-md-10 offset-md-1 p-0">
+                     <h5>Quota</h5>
+                  </div>
+                  <input type='number' id='quota' name='quota' class='col-md-10 offset-md-1' style='border:solid black 1px; padding:2 5 2 5;' onchange='validateDate()'>
                </div>
             
             </div>

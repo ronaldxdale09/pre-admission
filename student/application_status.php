@@ -18,6 +18,7 @@ $pending='';
 $rejected='';
 $prequalified='';
 $interview='';
+$waiting='';
 $successful='';
 if ($row['userStatus'] =='PENDING')
     $pending ='active';
@@ -40,8 +41,12 @@ elseif ($row['userStatus'] =='QUALIFIED') {
     $interview='active';
     $successful='active';
 }
-   
-
+elseif ($row['userStatus'] =='WAITING') {
+    $pending ='active';
+    $prequalified='active';
+    $interview='active';
+    $successful='active';
+}
 
 $logrecord = mysqli_query($db, "SELECT * from application_log where selectedCourse_id  ='$id'"); 
 ?>
@@ -135,6 +140,9 @@ $logrecord = mysqli_query($db, "SELECT * from application_log where selectedCour
                             }
                              
                             elseif ($log['userStatus'] =='QUALIFIED') {
+                                $status ='success';
+                            }
+                            elseif ($log['userStatus'] =='WAITING') {
                                 $status ='success';
                             }
                      ?>

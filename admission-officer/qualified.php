@@ -25,7 +25,11 @@ if (isset($_GET['course'])) {
                     <i class="fa fa-list" aria-hidden="true"><span>Home</span></i>
                 </a>
             </li>
-
+            <li>
+            <a href="evaluator_account.php" >
+            <i class="fa fa-list" aria-hidden="true"><span>Evaluator</span></i>
+            </a>
+         </li>
 
 
             <li>

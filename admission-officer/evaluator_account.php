@@ -13,7 +13,7 @@
       </a>
       <ul class="admin-menu">
          <li class="menu-heading">
-            <h3>Interviewer List</h3>
+            <h3>Evaluator Account</h3>
          </li>
          <li>
             <a href="index.php">
@@ -21,12 +21,12 @@
             </a>
          </li>
          <li>
-            <a href="interviewer_account.php" class="active" >
+            <a href="interviewer_account.php" >
             <i class="fa fa-list" aria-hidden="true"><span>Interviewer</span></i>
             </a>
          </li>
          <li>
-            <a href="evaluator_account.php" >
+            <a href="evaluator_account.php" class="active"  >
             <i class="fa fa-list" aria-hidden="true"><span>Evaluator</span></i>
             </a>
          </li>
@@ -44,9 +44,9 @@
       <article>
          <div class="table table-responsive-sm table-responsive-md table-responsive-lg table-responsive-xl mx-3 my-3">
          <div style='padding:10px;'>
-            <h2 style='margin-bottom:10px;'>Admission Officer</h2>
+            <h2 style='margin-bottom:10px;'>Evaluator Account</h2>
             <h5 style='margin-bottom:0px;'>
-               List of Interviewer Account
+               List of Evaluator Account
             </h5>
             <h6 style='margin-bottom:0px;'>
                Current Active Admission Schedule: <?php
@@ -59,14 +59,14 @@
             </h6>
             <hr>
             <div style='margin:0; padding:0;'>
-               <button class='btn btn-success' data-toggle="modal" data-target="#newInterviewer" style='margin-right:10px;'>Add New Interviewer</button>
+               <button class='btn btn-success' data-toggle="modal" data-target="#newInterviewer" style='margin-right:10px;'>Add New Evaluator</button>
             </div>
          </div>
          <div style='padding:10px;'>
             <table class="table table-sm table-striped table-bordered table-hover" id="list_course">
                <thead class="thead">
                   <?php 
-                     $results = mysqli_query($db, "SELECT * FROM interviewer INNER JOIN users INNER JOIN college WHERE interviewer.user_id = users.id AND interviewer.college_id = college.college_id");
+                     $results = mysqli_query($db, "SELECT * FROM evaluator INNER JOIN users INNER JOIN college WHERE evaluator.user_id = users.id AND evaluator.college_id = college.college_id");
                      ?>
                   <tr>
                      <th style='width:10%;'>ID</th>
@@ -79,9 +79,9 @@
                   <?php 
                      while ($row = mysqli_fetch_array($results)) { 
                      ?>
-                  <tr class='trow' id='<?php echo $row['interviewer_id']; ?>'>
+                  <tr class='trow' id='<?php echo $row['evaluator_id']; ?>'>
                      <td style='width:10%;' id='course-id-<?php echo $row['ao_id']; ?>'>
-                        <?php echo $row['interviewer_id']; ?> 
+                        <?php echo $row['evaluator_id']; ?> 
                      </td>
                      <td style='width:40%;' id='course-name-<?php echo $row['ao_id']; ?>'>
                         <?php echo $row['fname']." ".$row['lname']; ?> 
@@ -117,12 +117,12 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">INTERVIEW SCORE</h5>
+        <h5 class="modal-title" id="exampleModalLabel">NEW EVALUATOR ACCOUNT</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="function/interviewerNew.php" method="POST">
+      <form action="function/evaluatorNew.php" method="POST">
         <div class="modal-body">
           <input type="text" name="college_id" value="<?php echo $college_id ?>" hidden>
           <div class="row">
@@ -148,7 +148,7 @@
           <!-- attached -->
         </div>
         <div class="modal-footer">
-          <button type="accept" name="interviewer" class="btn btn-success">REGISTER</button>
+          <button type="accept" name="evaluator" class="btn btn-success">REGISTER</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">CLOSE</button>
         </div>
       </form>
